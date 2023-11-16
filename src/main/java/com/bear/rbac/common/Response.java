@@ -51,29 +51,4 @@ public class Response<T> {
         return new Response<T>(resultCode.getCode(), resultCode.getMessage(), null);
     }
 
-    public static <T> Response<T> validateFailed() {
-        return failed(ResponseEnum.VALIDATE_FAILED);
-    }
-
-    /**
-     * 参数验证失败返回结果
-     * @param message 提示信息
-     */
-    public static <T> Response<T> validateFailed(String message) {
-        return new Response<T>(ResponseEnum.VALIDATE_FAILED.getCode(), message, null);
-    }
-
-    /**
-     * 未登录返回结果
-     */
-    public static <T> Response<T> unauthorized(T data) {
-        return new Response<T>(ResponseEnum.UNAUTHORIZED.getCode(), ResponseEnum.UNAUTHORIZED.getMessage(), data);
-    }
-
-    /**
-     * 未授权返回结果
-     */
-    public static <T> Response<T> forbidden(T data) {
-        return new Response<T>(ResponseEnum.FORBIDDEN.getCode(), ResponseEnum.FORBIDDEN.getMessage(), data);
-    }
 }
