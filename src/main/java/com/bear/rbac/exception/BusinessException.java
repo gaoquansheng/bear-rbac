@@ -1,8 +1,11 @@
-package com.bear.rbac.config;
+package com.bear.rbac.exception;
 
 import lombok.Data;
 
 
+/**
+ * @author bear
+ */
 public class BusinessException extends RuntimeException {
 
     private Integer code;

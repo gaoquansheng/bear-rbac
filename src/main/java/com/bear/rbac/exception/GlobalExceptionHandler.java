@@ -1,6 +1,7 @@
-package com.bear.rbac.config;
+package com.bear.rbac.exception;
 
 import com.bear.rbac.common.Response;
+import com.bear.rbac.exception.BusinessException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,9 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+/**
+ * @author bear
+ */
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {

@@ -1,6 +1,6 @@
 package com.bear.rbac.service.impl;
 
-import com.bear.rbac.config.BusinessException;
+import com.bear.rbac.exception.BusinessException;
 import com.bear.rbac.entity.SysUser;
 import com.bear.rbac.form.LoginForm;
 import com.bear.rbac.service.LoginService;
@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import static com.bear.rbac.enums.UserStatusEnum.DISABLE;
-import static com.bear.rbac.enums.UserStatusEnum.NORMAL;
 
 @Service
 public class LoginServiceImpl implements LoginService {
