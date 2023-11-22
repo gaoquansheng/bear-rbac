@@ -186,22 +186,5 @@ public class SysUser implements Serializable {
         this.updateTime = updateTime;
     }
 
-    @Override
-    public String toString() {
-        return "SysUser{" +
-        "userId = " + userId +
-        ", orgId = " + orgId +
-        ", userName = " + userName +
-        ", userMobile = " + userMobile +
-        ", sex = " + sex +
-        ", avatar = " + avatar +
-        ", password = " + password +
-        ", status = " + status +
-        ", delFlag = " + delFlag +
-        ", createBy = " + createBy +
-        ", createTime = " + createTime +
-        ", updateBy = " + updateBy +
-        ", updateTime = " + updateTime +
-        "}";
-    }
+
 }
