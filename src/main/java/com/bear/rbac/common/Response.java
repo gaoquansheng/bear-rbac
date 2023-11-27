@@ -3,6 +3,9 @@ package com.bear.rbac.common;
 import com.bear.rbac.enums.ResponseEnum;
 import lombok.Data;
 
+/**
+ * @author bear
+ */
 @Data
 public class Response<T> {
 
