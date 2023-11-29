@@ -1,7 +1,14 @@
 package com.bear.rbac.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.bear.rbac.common.Response;
+import com.bear.rbac.entity.SysUser;
+import com.bear.rbac.service.ISysUserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
@@ -11,8 +18,17 @@ import org.springframework.stereotype.Controller;
  * @author bear
  * @since 2023-11-15
  */
-@Controller
+@RestController
 @RequestMapping("/sysUser")
 public class SysUserController {
 
+    @Autowired
+    private ISysUserService userService;
+
+    @GetMapping("/list")
+    public Response list() {
+        IPage<SysUser> page = new Page<>(1,10);
+        IPage<SysUser> page1 = userService.page(page);
+        return Response.success(page1);
+    }
 }
