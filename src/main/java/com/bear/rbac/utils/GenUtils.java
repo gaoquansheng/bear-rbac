@@ -1,13 +1,15 @@
 package com.bear.rbac.utils;
 
-import com.ruoyi.common.constant.GenConstants;
-import com.ruoyi.common.utils.StringUtils;
-import com.ruoyi.generator.config.GenConfig;
-import com.ruoyi.generator.domain.GenTable;
-import com.ruoyi.generator.domain.GenTableColumn;
+
+import com.bear.rbac.config.GenConfig;
+import com.bear.rbac.constants.GenConstants;
+import com.bear.rbac.entity.GenTable;
+import com.bear.rbac.entity.GenTableColumn;
 import org.apache.commons.lang3.RegExUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
+
 
 /**
  * 代码生成器 工具类
@@ -40,7 +42,7 @@ public class GenUtils
         column.setTableId(table.getTableId());
         column.setCreateBy(table.getCreateBy());
         // 设置java字段名
-        column.setJavaField(StringUtils.toCamelCase(columnName));
+        column.setJavaField(toCamelCase(columnName));
         // 设置默认类型
         column.setJavaType(GenConstants.TYPE_STRING);
         column.setQueryType(GenConstants.QUERY_EQ);
@@ -184,7 +186,7 @@ public class GenUtils
             String[] searchList = StringUtils.split(tablePrefix, ",");
             tableName = replaceFirst(tableName, searchList);
         }
-        return StringUtils.convertToCamelCase(tableName);
+        return convertToCamelCase(tableName);
     }
 
     /**
@@ -254,5 +256,72 @@ public class GenUtils
         {
             return 0;
         }
+    }
+
+
+    private static final char SEPARATOR = '_';
+
+    public static String toCamelCase(String s)
+    {
+        if (s == null)
+        {
+            return null;
+        }
+        if (s.indexOf(SEPARATOR) == -1)
+        {
+            return s;
+        }
+        s = s.toLowerCase();
+        StringBuilder sb = new StringBuilder(s.length());
+        boolean upperCase = false;
+        for (int i = 0; i < s.length(); i++)
+        {
+            char c = s.charAt(i);
+
+            if (c == SEPARATOR)
+            {
+                upperCase = true;
+            }
+            else if (upperCase)
+            {
+                sb.append(Character.toUpperCase(c));
+                upperCase = false;
+            }
+            else
+            {
+                sb.append(c);
+            }
+        }
+        return sb.toString();
+    }
+
+    public static String convertToCamelCase(String name)
+    {
+        StringBuilder result = new StringBuilder();
+        // 快速检查
+        if (name == null || name.isEmpty())
+        {
+            // 没必要转换
+            return "";
+        }
+        else if (!name.contains("_"))
+        {
+            // 不含下划线，仅将首字母大写
+            return name.substring(0, 1).toUpperCase() + name.substring(1);
+        }
+        // 用下划线将原始字符串分割
+        String[] camels = name.split("_");
+        for (String camel : camels)
+        {
+            // 跳过原始字符串中开头、结尾的下换线或双重下划线
+            if (camel.isEmpty())
+            {
+                continue;
+            }
+            // 首字母大写
+            result.append(camel.substring(0, 1).toUpperCase());
+            result.append(camel.substring(1).toLowerCase());
+        }
+        return result.toString();
     }
 }

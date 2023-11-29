@@ -39,6 +39,7 @@ public class GenController extends BaseController {
      */
     @GetMapping("/list")
     public Response<GenTable> genList(GenTable genTable) {
+
         List<GenTable> list = genTableService.selectGenTableList(genTable);
         return success(list);
     }
@@ -48,6 +49,7 @@ public class GenController extends BaseController {
      */
     @GetMapping(value = "/{tableId}")
     public Response getInfo(@PathVariable Long tableId) {
+
         GenTable table = genTableService.selectGenTableById(tableId);
         List<GenTable> tables = genTableService.selectGenTableAll();
         List<GenTableColumn> list = genTableColumnService.selectGenTableColumnListByTableId(tableId);
@@ -55,7 +57,7 @@ public class GenController extends BaseController {
         map.put("info", table);
         map.put("rows", list);
         map.put("tables", tables);
-        return (map);
+        return Response.success(map);
     }
 
     /**
@@ -94,7 +96,6 @@ public class GenController extends BaseController {
      */
     @PutMapping
     public Response editSave(@Validated @RequestBody GenTable genTable) {
-        genTableService.validateEdit(genTable);
         genTableService.updateGenTable(genTable);
         return success();
     }
@@ -104,7 +105,7 @@ public class GenController extends BaseController {
      */
     @DeleteMapping("/{tableIds}")
     public Response remove(@PathVariable Long[] tableIds) {
-        genTableService.deleteGenTableByIds(tableIds);
+        genTableService.deleteGenTableByIds(Arrays.asList(tableIds));
         return success();
     }
 

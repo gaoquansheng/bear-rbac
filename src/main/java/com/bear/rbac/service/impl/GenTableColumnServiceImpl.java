@@ -1,70 +1,76 @@
 package com.bear.rbac.service.impl;
 
+
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.bear.rbac.entity.GenTableColumn;
+import com.bear.rbac.mapper.GenTableColumnMapper;
 import com.bear.rbac.service.IGenTableColumnService;
-import com.ruoyi.common.core.text.Convert;
-import com.ruoyi.generator.domain.GenTableColumn;
-import com.ruoyi.generator.mapper.GenTableColumnMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
  * 业务字段 服务层实现
- * 
+ *
  * @author ruoyi
  */
 @Service
-public class GenTableColumnServiceImpl implements IGenTableColumnService
-{
-	@Autowired
-	private GenTableColumnMapper genTableColumnMapper;
+public class GenTableColumnServiceImpl extends ServiceImpl<GenTableColumnMapper, GenTableColumn> implements IGenTableColumnService {
 
-	/**
+
+    @Autowired
+    private GenTableServiceImpl genTableService;
+
+    /**
      * 查询业务字段列表
-     * 
+     *
      * @param tableId 业务字段编号
      * @return 业务字段集合
      */
-	@Override
-	public List<GenTableColumn> selectGenTableColumnListByTableId(Long tableId)
-	{
-	    return genTableColumnMapper.selectGenTableColumnListByTableId(tableId);
-	}
-	
+    @Override
+    public List<GenTableColumn> selectGenTableColumnListByTableId(Long tableId) {
+
+        return lambdaQuery().eq(GenTableColumn::getTableId, tableId).list();
+    }
+
     /**
      * 新增业务字段
-     * 
+     *
      * @param genTableColumn 业务字段信息
      * @return 结果
      */
-	@Override
-	public int insertGenTableColumn(GenTableColumn genTableColumn)
-	{
-	    return genTableColumnMapper.insertGenTableColumn(genTableColumn);
-	}
-	
-	/**
-     * 修改业务字段
-     * 
-     * @param genTableColumn 业务字段信息
-     * @return 结果
-     */
-	@Override
-	public int updateGenTableColumn(GenTableColumn genTableColumn)
-	{
-	    return genTableColumnMapper.updateGenTableColumn(genTableColumn);
-	}
+    @Override
+    public void insertGenTableColumn(GenTableColumn genTableColumn) {
+        save(genTableColumn);
+    }
 
-	/**
+    /**
+     * 修改业务字段
+     *
+     * @param genTableColumn 业务字段信息
+     * @return 结果
+     */
+    @Override
+    public void updateGenTableColumn(GenTableColumn genTableColumn) {
+        updateById(genTableColumn);
+    }
+
+    /**
      * 删除业务字段对象
-     * 
+     *
      * @param ids 需要删除的数据ID
      * @return 结果
      */
-	@Override
-	public int deleteGenTableColumnByIds(String ids)
-	{
-		return genTableColumnMapper.deleteGenTableColumnByIds(Convert.toLongArray(ids));
-	}
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void deleteGenTableColumnByIds(String ids) {
+
+        List<Long> idList = Arrays.stream(ids.split(","))
+                .map(Long::parseLong)
+                .toList();
+        removeBatchByIds(idList);
+    }
 }
