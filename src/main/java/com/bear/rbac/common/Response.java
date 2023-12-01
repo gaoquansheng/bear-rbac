@@ -1,5 +1,6 @@
 package com.bear.rbac.common;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.bear.rbac.enums.ResponseEnum;
 import lombok.Data;
 
@@ -40,6 +41,11 @@ public class Response<T> {
 
     public static <T> Response<T> success(T data, String message) {
         return new Response<T>(ResponseEnum.SUCCESS.getCode(), message, data);
+    }
+
+    public static <T> Response<PageResult<T>> toPage(IPage<T> iPage) {
+        PageResult<T> pageResult = new PageResult<>(iPage.getRecords(),iPage.getTotal());
+        return new Response<PageResult<T>>(ResponseEnum.SUCCESS.getCode(), ResponseEnum.SUCCESS.getMessage(), pageResult);
     }
 
     public static <T> Response<T> failed() {

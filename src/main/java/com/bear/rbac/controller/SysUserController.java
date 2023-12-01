@@ -2,6 +2,7 @@ package com.bear.rbac.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.bear.rbac.common.PageResult;
 import com.bear.rbac.common.Response;
 import com.bear.rbac.entity.SysUser;
 import com.bear.rbac.service.ISysUserService;
@@ -26,9 +27,10 @@ public class SysUserController {
     private ISysUserService userService;
 
     @GetMapping("/list")
-    public Response list() {
+    public Response<PageResult<SysUser>> list() {
+
         IPage<SysUser> page = new Page<>(1,10);
         IPage<SysUser> page1 = userService.page(page);
-        return Response.success(page1);
+        return Response.(page1);
     }
 }
