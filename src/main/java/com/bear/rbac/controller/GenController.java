@@ -2,7 +2,6 @@ package com.bear.rbac.controller;
 
 
 import cn.hutool.core.convert.Convert;
-import com.bear.rbac.base.BaseController;
 import com.bear.rbac.common.Response;
 import com.bear.rbac.entity.GenTable;
 import com.bear.rbac.entity.GenTableColumn;
@@ -27,7 +26,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/tool/gen")
-public class GenController extends BaseController {
+public class GenController {
     @Autowired
     private IGenTableService genTableService;
 
@@ -38,10 +37,10 @@ public class GenController extends BaseController {
      * 查询代码生成列表
      */
     @GetMapping("/list")
-    public Response<GenTable> genList(GenTable genTable) {
+    public Response<List<GenTable>> genList(GenTable genTable) {
 
         List<GenTable> list = genTableService.selectGenTableList(genTable);
-        return success(list);
+        return Response.success(list);
     }
 
     /**
@@ -66,7 +65,7 @@ public class GenController extends BaseController {
     @GetMapping("/db/list")
     public Response dataList(GenTable genTable) {
         List<GenTable> list = genTableService.selectDbTableList(genTable);
-        return success(list);
+        return Response.success(list);
     }
 
     /**
@@ -76,7 +75,7 @@ public class GenController extends BaseController {
     public Response columnList(Long tableId) {
         List<GenTableColumn> list = genTableColumnService.selectGenTableColumnListByTableId(tableId);
 
-        return success(list);
+        return Response.success(list);
     }
 
     /**
@@ -88,7 +87,7 @@ public class GenController extends BaseController {
         // 查询表信息
         List<GenTable> tableList = genTableService.selectDbTableListByNames(Arrays.asList(tableNames));
         genTableService.importGenTable(tableList);
-        return success();
+        return Response.success();
     }
 
     /**
@@ -97,7 +96,7 @@ public class GenController extends BaseController {
     @PutMapping
     public Response editSave(@Validated @RequestBody GenTable genTable) {
         genTableService.updateGenTable(genTable);
-        return success();
+        return Response.success();
     }
 
     /**
@@ -106,7 +105,7 @@ public class GenController extends BaseController {
     @DeleteMapping("/{tableIds}")
     public Response remove(@PathVariable Long[] tableIds) {
         genTableService.deleteGenTableByIds(Arrays.asList(tableIds));
-        return success();
+        return Response.success();
     }
 
     /**
@@ -115,7 +114,7 @@ public class GenController extends BaseController {
     @GetMapping("/preview/{tableId}")
     public Response preview(@PathVariable("tableId") Long tableId) throws IOException {
         Map<String, String> dataMap = genTableService.previewCode(tableId);
-        return success(dataMap);
+        return Response.success(dataMap);
     }
 
     /**
@@ -133,7 +132,7 @@ public class GenController extends BaseController {
     @GetMapping("/genCode/{tableName}")
     public Response genCode(@PathVariable("tableName") String tableName) {
         genTableService.generatorCode(tableName);
-        return success();
+        return Response.success();
     }
 
     /**
@@ -142,7 +141,7 @@ public class GenController extends BaseController {
     @GetMapping("/synchDb/{tableName}")
     public Response synchDb(@PathVariable("tableName") String tableName) {
         genTableService.synchDb(tableName);
-        return success();
+        return Response.success();
     }
 
     /**
