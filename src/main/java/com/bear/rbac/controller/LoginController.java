@@ -18,6 +18,7 @@ public class LoginController {
     @RequestMapping("/login")
     public Response<LoginVO> login(@RequestBody LoginForm form){
 
+        System.out.println(form);
         LoginVO loginVO = loginService.login(form);
         return Response.success(loginVO);
     }

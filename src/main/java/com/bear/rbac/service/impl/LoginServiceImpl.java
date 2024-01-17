@@ -20,10 +20,10 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public LoginVO login(LoginForm form) {
 
-        SysUser user = userService.getUserByUserName(form.getUserName());
+        SysUser user = userService.getUserByUserName(form.getUsername());
         checkUserStatus(user);
         // TODO: 2023/11/16 引入redis
-        return null;
+        return new LoginVO();
     }
 
     private void checkUserStatus(SysUser user) {

@@ -2,10 +2,10 @@ package com.bear.rbac.exception;
 
 import lombok.Data;
 
-
 /**
  * @author bear
  */
+@Data
 public class BusinessException extends RuntimeException {
 
     private Integer code;
@@ -25,4 +25,5 @@ public class BusinessException extends RuntimeException {
         this.code = code;
         this.message = message;
     }
+
 }
