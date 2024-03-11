@@ -23,6 +23,6 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         if(StringUtils.isBlank(userName)) {
             return null;
         }
-        return lambdaQuery().eq(SysUser::getUserName,userName).one();
+        return lambdaQuery().eq(SysUser::getUsername,userName).one();
     }
 }

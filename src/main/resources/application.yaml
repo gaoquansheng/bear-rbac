@@ -8,6 +8,14 @@ spring:
     url: jdbc:mysql://localhost:3306/bear?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true
     username: root
     password: gm211318
-
   main:
     allow-circular-references: true
+
+  redis:
+    host: localhost
+    port: 6379
+
+bear:
+  whiteUrls:
+    - /login
+    - /test

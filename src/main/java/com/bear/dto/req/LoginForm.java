@@ -1,4 +1,4 @@
-package com.bear.form;
+package com.bear.dto.req;
 
 import lombok.Data;
 

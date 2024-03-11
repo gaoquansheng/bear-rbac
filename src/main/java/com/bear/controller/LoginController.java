@@ -1,7 +1,7 @@
 package com.bear.controller;
 
 import com.bear.common.Response;
-import com.bear.form.LoginForm;
+import com.bear.dto.req.LoginForm;
 import com.bear.service.LoginService;
 import com.bear.vo.LoginVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,6 @@ public class LoginController {
     @RequestMapping("/login")
     public Response<LoginVO> login(@RequestBody LoginForm form){
 
-        System.out.println(form);
         LoginVO loginVO = loginService.login(form);
         return Response.success(loginVO);
     }

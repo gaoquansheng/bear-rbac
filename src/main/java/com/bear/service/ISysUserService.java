@@ -1,7 +1,7 @@
 package com.bear.service;
 
-import com.bear.entity.SysUser;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.bear.entity.SysUser;
 
 /**
  * <p>
@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ISysUserService extends IService<SysUser> {
 
+//    IPage<SysUser> page(SysUser sysUser);
 }

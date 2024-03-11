@@ -1,11 +1,8 @@
 package com.bear.entity;
 
 import com.bear.base.BaseEntity;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
-
-import java.util.List;
 
 /**
  * 业务表 gen_table
@@ -83,28 +80,28 @@ public class GenTable extends BaseEntity {
     /**
      * 主键信息
      */
-    private GenTableColumn pkColumn;
+//    private GenTableColumn pkColumn;
 
     /**
      * 表列信息
      */
-    @Valid
-    private List<GenTableColumn> columns;
+//    @Valid
+//    private List<GenTableColumn> columns;
 
     /**
      * 其它生成选项
      */
-    private String options;
-
-
-    /**
-     * 上级菜单ID字段
-     */
-    private String parentMenuId;
-
-    /**
-     * 上级菜单名称字段
-     */
-    private String parentMenuName;
+//    private String options;
+//
+//
+//    /**
+//     * 上级菜单ID字段
+//     */
+//    private String parentMenuId;
+//
+//    /**
+//     * 上级菜单名称字段
+//     */
+//    private String parentMenuName;
 
 }
